@@ -5,7 +5,7 @@ class Update:
         
         self.update_id = update_id
         self.messages: str = []
-        self.posts = []
+        self.cahannel_posts = []
         self.update_types = {}
         
         if 'ok' in update_response and update_response['ok'] and 'result' in update_response:

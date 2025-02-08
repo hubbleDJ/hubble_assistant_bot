@@ -14,9 +14,14 @@ class Bot:
         self.update_id = 0
         self.tg_url = f'https://api.telegram.org/bot{self.token}'
         
-        response = asyncio.run(self.async_request(
+        self.GetMe()
+    
+    def GetMe(self) -> None:
+        '''Получает информацию о боте'''
+        
+        response = asyncio.run(self.AcyncRequest(
             url=f'{self.tg_url}/getMe',
-            request_type='post'
+            request_type='get'
         ))
         
         if (
@@ -25,21 +30,22 @@ class Bot:
         ) > 0):
             for key, value in response['result'].items():
                 setattr(self, key, value)
-    
+        
+        
     def GetUpdates(self) -> Update:
         '''Получение обновлений из бота'''
         
         response = asyncio.run(
-            self.async_request(
+            self.AcyncRequest(
                 url=f'{self.tg_url}/getUpdates',
                 params={'offset': self.update_id}
             )
         )
         
         return Update(response)
-    
+
     @staticmethod
-    async def async_request(url: str, params: dict={}, request_type: str='get'):
+    async def AcyncRequest(url: str, params: dict={}, request_type: str='get'):
         '''Запросы http/https'''
         
         async with aiohttp.ClientSession() as session:
