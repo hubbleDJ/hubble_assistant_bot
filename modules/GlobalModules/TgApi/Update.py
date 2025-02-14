@@ -6,7 +6,6 @@ class Update:
         self.update_id = update_id
         self.messages: list[Message] = []
         self.cahannel_posts: list = []
-        self.update_types = set()
         
         print(update_response)
         

@@ -14,9 +14,9 @@ class Bot:
         self.update_id = 0
         self.tg_url = f'https://api.telegram.org/bot{self.token}'
         
-        self.GetMe()
+        self.get_me()
     
-    def GetMe(self) -> None:
+    def get_me(self) -> None:
         '''Получает информацию о боте'''
         
         response = asyncio.run(self.AcyncRequest(
@@ -32,7 +32,7 @@ class Bot:
                 setattr(self, key, value)
         
         
-    def GetUpdates(self) -> Update:
+    def get_updates(self) -> Update:
         '''Получение обновлений из бота'''
         
         response = asyncio.run(
@@ -43,6 +43,9 @@ class Bot:
         )
         
         return Update(response)
+    
+    def set_message(self) -> None:
+        pass
 
     @staticmethod
     async def AcyncRequest(url: str, params: dict={}, request_type: str='get'):
