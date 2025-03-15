@@ -7,8 +7,6 @@ class Update:
         self.messages: list[Message] = []
         self.cahannel_posts: list = []
         
-        print(update_response)
-        
         if 'ok' in update_response and update_response['ok'] and 'result' in update_response:
             for result in sorted(update_response['result'], key=lambda result: result['update_id']):
                 if 'update_id' in result and result['update_id'] > self.update_id:
