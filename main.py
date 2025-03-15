@@ -1,5 +1,3 @@
-import json
-
 from vars.GlobalVars import TG_TOKEN
 from modules.GlobalModules.TgApi import Bot
 

@@ -72,7 +72,7 @@ class Bot:
                     "remove_keyboard": drop_buttons
                 }
 
-            response = asyncio.run(
+            asyncio.run(
                 self.AcyncRequest(
                     url=f'{self.tg_url}/sendMessage',
                     params=payload,

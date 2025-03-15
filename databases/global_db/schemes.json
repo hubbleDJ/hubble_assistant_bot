@@ -1,0 +1,322 @@
+[
+    {
+        "name": "logs",
+        "columns": [
+            {
+                "name": "timestamp",
+                "type": "timestamp",
+                "not_null": true
+            }, {
+                "name": "name_bot",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "chat_id",
+                "type": "integer"
+            }, {
+                "name": "user_id",
+                "type": "integer"
+            }, {
+                "name": "level_name",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "name_func",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "message",
+                "type": "text",
+                "not_null": true
+            }
+        ]
+    }, {
+        "name": "user_vars",
+        "columns": [
+            {
+                "name": "chat_id",
+                "type": "integer",
+                "not_null": true
+            }, {
+                "name": "user_id",
+                "type": "integer",
+                "not_null": true
+            }, {
+                "name": "update_datetime",
+                "type": "timestamp",
+                "not_null": true
+            }, {
+                "name": "var_name",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "value",
+                "type": "text"
+            }
+        ]
+    }, {
+        "name": "states",
+        "columns": [
+            {
+                "name": "chat_id",
+                "type": "integer",
+                "not_null": true,
+                "primary_key": true
+            }, {
+                "name": "user_id",
+                "type": "integer",
+                "not_null": true
+            }, {
+                "name": "buttons",
+                "type": "text",
+                "default": "\"{}\""
+            }, {
+                "name": "next_screen_type",
+                "type": "text"
+            }, {
+                "name": "next_screen_id",
+                "type": "text"
+            }, {
+                "name": "default_screen_type",
+                "type": "text"
+            }, {
+                "name": "default_screen_id",
+                "type": "text"
+            }
+        ]
+    }, {
+        "name": "text",
+        "columns": [
+            {
+                "name": "name",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "text",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "group_in",
+                "type": "text",
+                "default": "\"[]\""
+            }, {
+                "name": "group_not_in",
+                "type": "text",
+                "default": "\"[]\""
+            }
+        ]
+    }, {
+        "name": "buttons",
+        "columns": [
+            {
+                "name": "name",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "button",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "type",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "function_or_screen_type",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "function_or_screen_name",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "group_in",
+                "type": "text",
+                "default": "\"[]\""
+            }, {
+                "name": "group_not_in",
+                "type": "text",
+                "default": "\"[]\""
+            }
+        ]
+    }, {
+        "name": "users",
+        "columns": [
+            {
+                "name": "user_id",
+                "type": "integer",
+                "not_null": true,
+                "primary_key": true
+            }, {
+                "name": "chats",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "update_datetime",
+                "type": "timestamp",
+                "not_null": true
+            }, {
+                "name": "is_bot",
+                "type": "integer",
+                "not_null": true
+            }, {
+                "name": "first_name",
+                "type": "text"
+            }, {
+                "name": "last_name",
+                "type": "text"
+            }, {
+                "name": "username",
+                "type": "text"
+            }, {
+                "name": "telephone",
+                "type": "text"
+            }, {
+                "name": "email",
+                "type": "text"
+            }, {
+                "name": "other_info",
+                "type": "text"
+            }
+        ]
+    }, {
+        "name": "groups",
+        "columns": [
+            {
+                "name": "id",
+                "type": "text",
+                "not_null": true,
+                "primary_key": true
+            }, {
+                "name": "is_active",
+                "type": "integer",
+                "not_null": true,
+                "default": 1
+            }, {
+                "name": "users",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "description",
+                "type": "text",
+                "not_null": true
+            }
+        ]
+    }, {
+        "name": "scripts_by_time",
+        "columns": [
+            {
+                "name": "name",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "is_active",
+                "type": "integer",
+                "not_null": true,
+                "default": 1
+            }, {
+                "name": "description",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "minutes",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "hours",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "day",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "month",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "day_type",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "function_name",
+                "type": "text",
+                "not_null": true
+            }
+        ]
+    }, {
+        "name": "screens",
+        "columns": [
+            {
+                "name": "id",
+                "type": "text",
+                "not_null": true,
+                "primary_key": true
+            }, {
+                "name": "scenario_name",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "description",
+                "type": "text",
+                "not_null": true
+            }, {
+                "name": "message_text",
+                "type": "text"
+            }, {
+                "name": "message_text_func",
+                "type": "text"
+            }, {
+                "name": "sticker",
+                "type": "text"
+            }, {
+                "name": "img",
+                "type": "text",
+                "default": "\"[]\""
+            }, {
+                "name": "img_func",
+                "type": "text"
+            }, {
+                "name": "videos",
+                "type": "text",
+                "default": "\"[]\""
+            }, {
+                "name": "video_func",
+                "type": "text"
+            }, {
+                "name": "files",
+                "type": "text",
+                "default": "\"[]\""
+            }, {
+                "name": "files_func",
+                "type": "text"
+            }, {
+                "name": "geotag",
+                "type": "text"
+            }, {
+                "name": "geotag_func",
+                "type": "text"
+            }, {
+                "name": "buttons",
+                "type": "text"
+            }, {
+                "name": "buttons_func",
+                "type": "text"
+            }, {
+                "name": "function",
+                "type": "text"
+            }, {
+                "name": "next_screen_type",
+                "type": "text"
+            }, {
+                "name": "next_screen_id",
+                "type": "text"
+            }, {
+                "name": "default_screen_type",
+                "type": "text"
+            }, {
+                "name": "default_screen_id",
+                "type": "text"
+            }
+        ]
+    }
+]
