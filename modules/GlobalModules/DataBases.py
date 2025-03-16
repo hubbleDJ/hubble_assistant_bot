@@ -14,9 +14,7 @@ class DB:
         self.path = path
         self.table_name = table_name
         self.columns = columns
-
         self.create_db_and_table()
-    
     
     def create_db_and_table(self) -> None:
         """Создает базу данных и таблицу"""
@@ -24,14 +22,12 @@ class DB:
         def get_column_crete_info(column: dict) -> str:
             """Строка с созданием колонки"""
             
-            column_str = (
+            return (
                 f'''{column['name']} {column['type']}'''
                 f'''{' not null' if column.get('not_null') else ''}'''
                 f'''{' primary key' if column.get('primary_key') else ''}'''
                 f'''{f' default {column.get("default")}' if column.get('default') else ''}'''
             )
-            
-            return column_str
         
         columns_str = ',\n\t'.join([get_column_crete_info(column) for column in self.columns])
         
@@ -40,9 +36,7 @@ class DB:
             f'{columns_str}'
             '\n)'
         )
-        
         asyncio.run(self.run_query(query))
-    
     
     def add_values(self, data: tuple[dict[str, str|int|float]]) -> None:
         """Добавляет записи в таблицу"""
@@ -65,7 +59,6 @@ class DB:
             data=data
         ))
     
-    
     def update_values(self, new_values: dict, condition: str) -> None:
         """Обновляет данные в таблице"""
         
@@ -78,14 +71,11 @@ class DB:
             values=values
         ))
     
-    
     def get_values(self, columns_name: list, condition: str) -> list:
         """Достает записи из таблицы"""
         
         query = f'''select {', '.join(columns_name)} from {self.table_name} where {condition}'''
-        
         return asyncio.run(self.run_query(query=query))
-    
     
     def drop_values(self, condition: str) -> None:
         """Удаляет записи"""
@@ -94,6 +84,29 @@ class DB:
         
         asyncio.run(self.run_query(query=query))
     
+    def get_table_info(self) -> list:
+        """
+            Получение информации о таблице
+            
+            column_id       - Идентификатор колонки
+            name            - Имя колонки
+            type            - Тип данных колонки
+            is_not_null     - Может ли колонка содержать NULL (0 или 1)
+            default_value   - Значение по умолчанию
+            is_primary_key  - Является ли колонка частью первичного ключа (0 или 1)
+        """
+        
+        table_info = []
+        column_names = [
+            'column_id', 'name', 'type', 'is_not_null',
+            'default_value', 'is_primary_key'
+        ]
+        query = f'''pragma table_info({self.table_name})'''
+        
+        for column in asyncio.run(self.run_query(query=query)):
+            column_dict = dict(zip(column_names, column))
+            table_info.append(column_dict)
+        return table_info
     
     async def run_query(self, query: str, data: tuple[dict[str, str|int|float]]=None, values: tuple[int|str|float]=None) -> Any:
         """Запрос в базу данных"""
@@ -139,4 +152,5 @@ if __name__ == '__main__':
             )
             
             print(db.get_values(columns_name=['group_in'], condition='name="валера"'))
+            print(db.get_table_info())
         
